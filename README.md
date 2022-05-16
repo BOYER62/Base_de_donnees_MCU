@@ -31,9 +31,22 @@ ORDER BY `actor`.`name` ASC, `actor`.`first name`  ASC
 -------------------------------------------------------------------------------------
 ### une requête pour ajouter un film
 
+''''
+INSERT INTO `movies`(`title`, `release date`, `movie duration`, `director`) VALUES ('Docteur Strange','2022-05-04','115','Scott Derrickson')
+''''
+------------------------------------------------------------------------------------
+
 ### une requête pour ajouter un acteur
+''''
+INSERT INTO `actors`(`name`, `first name`, `dob`) VALUES ('Cumberbatch','Cumberbatch','1976-07-19')
+''''
+-------------------------------------------------------------------------------------
 
 ### une requête pour modifier un film
+''''
+UPDATE `movies` SET `movie duration`='120' WHERE `title`='Docteur Strange'
+''''
+-------------------------------------------------------------------------------------
 
 ### une requête pour supprimer un acteur
 
