@@ -11,7 +11,7 @@ ORDER BY `movies`.`release date` DESC
 -------------------------------------------------------------------------------------
 ## les noms, prénoms et ages des acteurs de plus de 30 ans dans l'ordre alphabétique
 ````
-SELECT `name`, `first_name`, (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(`dob`)), '%Y')+0) 
+SELECT `name`, `first_name`, (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(`dob`)), '%Y')+0) AS Age
 FROM `actors` 
 WHERE (DATE_FORMAT(FROM_DAYS(TO_DAYS(NOW())-TO_DAYS(`dob`)), '%Y')+0) > 30  
 ORDER BY `actors`.`name` ASC, `actors`.`first_name`  ASC
