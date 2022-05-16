@@ -38,9 +38,9 @@ INSERT INTO `movies`(`title`, `release date`, `movie duration`, `director`) VALU
 
 ### une requête pour ajouter un acteur
 ''''
-INSERT INTO `actors`(`name`, `first name`, `dob`) VALUES ('Cumberbatch','Cumberbatch','1976-07-19')
+INSERT INTO `actors`(`name`, `first name`, `dob`) VALUES ('Cumberbatch','Benedict','1976-07-19')
 ''''
--------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 
 ### une requête pour modifier un film
 ''''
