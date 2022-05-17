@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le : lun. 16 mai 2022 à 12:21
+-- Généré le : mar. 17 mai 2022 à 09:54
 -- Version du serveur :  8.0.19
 -- Version de PHP : 7.4.11
 
@@ -54,7 +54,12 @@ INSERT INTO `actors` (`id_actors`, `name`, `first_name`, `dob`, `creation_date`,
 (11, 'Downey Jr.', 'Robert ', '1965-04-04', '2022-05-14 20:54:56', '2022-05-14 20:54:56'),
 (12, 'Paltrow', 'Gwyneth ', '1972-09-27', '2022-05-14 20:54:56', '2022-05-14 20:54:56'),
 (13, 'Howard', 'Terrence ', '1969-03-11', '2022-05-14 20:57:27', '2022-05-14 20:57:27'),
-(14, 'Bridges', 'Jeff ', '1949-12-04', '2022-05-14 20:57:27', '2022-05-14 20:57:27');
+(14, 'Bridges', 'Jeff ', '1949-12-04', '2022-05-14 20:57:27', '2022-05-14 20:57:27'),
+(17, 'Leto', 'Jared', '1971-12-26', '2022-05-17 08:26:55', '2022-05-17 08:26:55'),
+(21, 'Smith', 'Matt', '1982-10-28', '2022-05-17 08:43:38', '2022-05-17 08:43:38'),
+(25, 'Arjona', 'Adria ', '1992-04-25', '2022-05-17 08:52:45', '2022-05-17 08:52:45'),
+(26, 'Harris', 'Jared', '1961-08-24', '2022-05-17 08:54:12', '2022-05-17 08:54:12'),
+(27, 'Gibson', 'Tyrese', '1978-12-30', '2022-05-17 08:57:59', '2022-05-17 08:57:59');
 
 -- --------------------------------------------------------
 
@@ -80,7 +85,8 @@ INSERT INTO `movies` (`id_movies`, `title`, `release date`, `movie duration`, `d
 (1, '  Captain America: First Avenger', '2011-08-17', 124, 'Joe Johnston', '2022-05-14 19:13:41'),
 (2, 'Captain Marvel', '2019-03-06', 124, 'Anna Boden', '2022-05-14 20:39:31'),
 (3, 'iron man', '2008-04-30', 126, 'Jon Favreau', '2022-05-14 20:52:27'),
-(4, 'Docteur Strange', '2022-05-04', 120, 'Scott Derrickson', '2022-05-16 08:22:34');
+(4, 'Docteur Strange', '2022-05-04', 120, 'Scott Derrickson', '2022-05-16 08:22:34'),
+(5, 'Morbius', '2022-03-30', 108, 'Daniel Espinosa', '2022-05-17 09:01:04');
 
 -- --------------------------------------------------------
 
@@ -111,7 +117,12 @@ INSERT INTO `relationships` (`title_id`, `name_id`) VALUES
 ('iron man', 'Downey Jr.'),
 ('iron man', 'Paltrow'),
 ('iron man', 'Howard'),
-('iron man', 'Bridges');
+('iron man', 'Bridges'),
+('Morbius', 'Leto'),
+('Morbius', 'Arjona'),
+('Morbius', 'Harris'),
+('Morbius', 'Gibson'),
+('Morbius', 'Smith');
 
 --
 -- Index pour les tables déchargées
@@ -122,14 +133,17 @@ INSERT INTO `relationships` (`title_id`, `name_id`) VALUES
 --
 ALTER TABLE `actors`
   ADD PRIMARY KEY (`id_actors`),
-  ADD KEY `name` (`name`);
+  ADD UNIQUE KEY `name_2` (`name`,`first_name`,`dob`),
+  ADD KEY `name` (`name`) USING BTREE;
 
 --
 -- Index pour la table `movies`
 --
 ALTER TABLE `movies`
   ADD PRIMARY KEY (`id_movies`),
-  ADD KEY `title` (`title`);
+  ADD UNIQUE KEY `title` (`title`) USING BTREE,
+  ADD UNIQUE KEY `release date` (`release date`),
+  ADD UNIQUE KEY `title_2` (`title`,`release date`);
 
 --
 -- Index pour la table `relationships`
@@ -146,13 +160,13 @@ ALTER TABLE `relationships`
 -- AUTO_INCREMENT pour la table `actors`
 --
 ALTER TABLE `actors`
-  MODIFY `id_actors` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_actors` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `movies`
 --
 ALTER TABLE `movies`
-  MODIFY `id_movies` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_movies` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Contraintes pour les tables déchargées
@@ -162,8 +176,8 @@ ALTER TABLE `movies`
 -- Contraintes pour la table `relationships`
 --
 ALTER TABLE `relationships`
-  ADD CONSTRAINT `actor.name` FOREIGN KEY (`name_id`) REFERENCES `actors` (`name`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `movies.title` FOREIGN KEY (`title_id`) REFERENCES `movies` (`title`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `actor.name` FOREIGN KEY (`name_id`) REFERENCES `actors` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `movies.title` FOREIGN KEY (`title_id`) REFERENCES `movies` (`title`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
