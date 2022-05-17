@@ -76,3 +76,4 @@ LIMIT 3
 ````
 
 Correction Steeven: ajouter des _ pour la table movies et ajouter _ au création date ligne 74 dans le readme
+Correction Cécile: idem, sinon c'était très bien :) 
